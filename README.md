@@ -2,7 +2,8 @@
 
 unofficially dark theme / dark mode for semanticmerge 2.0.138.0
 
-Dark theme is not officially supported yet in this version of semantic merge, but this is my take of fixing up what is already working.
+Dark theme is not officially supported yet in this version of semantic merge, but this is my take of fixing up what is already working in 2.0.138.0. This is highly experimental (and might break in any other version), as some of the changes comes from using SnoopWpf to understanding the XAML.
+
 This uses most of the same colors as VSCode Dark.
 
 Only supports C# for now. If you want Java etc., then change the `languages.conf` file.
