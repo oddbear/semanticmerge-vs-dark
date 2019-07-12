@@ -1,0 +1,322 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Codice.I3;assembly=Codice.I3">
+  <Style TargetType="ButtonBase" x:Key="I3ButtonStyle">
+    <Setter Property="SnapsToDevicePixels" Value="true" />
+    <Setter Property="OverridesDefaultStyle" Value="true" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ButtonBase}">
+          <Grid x:Name="GridName" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+            <Rectangle x:Name="OuterRectangle"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                RadiusX="3"
+                RadiusY="3"
+                StrokeThickness="1"
+                Fill="Transparent"
+                Opacity="0">
+              <Rectangle.Stroke>
+                <SolidColorBrush Color="{StaticResource ButtonOuterBorder}" />
+              </Rectangle.Stroke>
+            </Rectangle>
+            <Rectangle x:Name="InnerRectangle" Margin="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                RadiusX="3"
+                RadiusY="3"
+                StrokeThickness="1"
+                Opacity="0">
+              <Rectangle.Stroke>
+                <SolidColorBrush x:Name="InnerBorderBrush" Color="{StaticResource ButtonInnerBorder}" />
+              </Rectangle.Stroke>
+              <Rectangle.Fill>
+                <LinearGradientBrush x:Name="BgBrush" StartPoint="0,0" EndPoint="0,1">
+                  <GradientStop Color="{StaticResource ButtonBackground1}" Offset="0" />
+                  <GradientStop Color="{StaticResource ButtonBackground2}" Offset="0.9" />
+                </LinearGradientBrush>
+              </Rectangle.Fill>
+            </Rectangle>
+            <DockPanel Name="ContentPresenterDockPanel">
+              <ContentPresenter x:Name="ContentPresenter"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding  Content}">
+                <TextBlock.Foreground>
+                  <SolidColorBrush Color="{StaticResource ButtonForeground}" />
+                </TextBlock.Foreground>
+              </ContentPresenter>
+            </DockPanel>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="0" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="0" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="MouseOver">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Checked">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground1}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground2}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="InnerBorderBrush" To="{StaticResource ButtonClickedInnerBorder}" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground1}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground2}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="InnerBorderBrush" To="{StaticResource ButtonClickedInnerBorder}" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="ButtonBase" x:Key="I3ToggleButtonStyle">
+    <Setter Property="SnapsToDevicePixels" Value="true" />
+    <Setter Property="OverridesDefaultStyle" Value="true" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ButtonBase}">
+          <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+            <Rectangle x:Name="OuterRectangle"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                StrokeThickness="1"
+                Fill="Transparent"
+                Opacity="0">
+              <Rectangle.Stroke>
+                <SolidColorBrush Color="{StaticResource ButtonOuterBorder}" />
+              </Rectangle.Stroke>
+            </Rectangle>
+            <Rectangle x:Name="InnerRectangle" Margin="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                StrokeThickness="1"
+                Opacity="0">
+              <Rectangle.Stroke>
+                <SolidColorBrush x:Name="InnerBorderBrush" Color="{StaticResource ButtonInnerBorder}" />
+              </Rectangle.Stroke>
+              <Rectangle.Fill>
+                <LinearGradientBrush x:Name="BgBrush" StartPoint="0,0" EndPoint="0,1">
+                  <GradientStop Color="{StaticResource ButtonBackground1}" Offset="0" />
+                  <GradientStop Color="{StaticResource ButtonBackground2}" Offset="0.9" />
+                </LinearGradientBrush>
+              </Rectangle.Fill>
+            </Rectangle>
+            <DockPanel Name="ContentPresenterDockPanel">
+              <ContentPresenter x:Name="ContentPresenter"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding  Content}">
+                <TextBlock.Foreground>
+                  <SolidColorBrush Color="{StaticResource ButtonForeground}" />
+                </TextBlock.Foreground>
+              </ContentPresenter>
+            </DockPanel>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="MouseOver">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Checked">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground1}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground2}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="InnerBorderBrush" To="{StaticResource ButtonClickedInnerBorder}" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterRectangle" To="1" Duration="0:0:0.1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InnerRectangle" To="1" Duration="0:0:0.1" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground1}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BgBrush" To="{StaticResource ButtonClickedBackground2}" Duration="0:0:0" />
+                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="InnerBorderBrush" To="{StaticResource ButtonClickedInnerBorder}" Duration="0:0:0.1" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type TextBox}" x:Key="I3TextBoxStyle">
+    <Setter Property="Padding" Value="1"/>
+    <Setter Property="AllowDrop" Value="true"/>
+    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TextBox}">
+          <Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="Focused">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource TextBoxFocusedBackground}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.09" />
+                    <ColorAnimation To="{StaticResource TextBoxFocusedBorder}" Storyboard.TargetName="BordBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.09" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource TextBoxDisabledBackground}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="Color" Duration="0:0:0" />
+                    <DoubleAnimation To="0.6" Storyboard.TargetName="PART_ContentHost" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0:0:0" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="MouseOver">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource TextBoxFocusedBackground}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.09" />
+                    <ColorAnimation To="{StaticResource TextBoxFocusedBorder}" Storyboard.TargetName="BordBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.09" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border BorderThickness="1">
+              <Border.Background>
+                <SolidColorBrush Color="{StaticResource TextBoxFocusedBackground}" x:Name="BgBrush" />
+              </Border.Background>
+              <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource TextBoxBorder}" x:Name="BordBrush" />
+              </Border.BorderBrush>
+              <ScrollViewer Margin="1" x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </Border>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type Button}" x:Key="Win8NativeButtonStyle">
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Padding" Value="1"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource NativeButtonNormalBackground1}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Duration="0:0:0.07"/>
+                    <ColorAnimation To="{StaticResource NativeButtonNormalBackground2}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Duration="0:0:0.07"/>
+                    <ColorAnimation To="{StaticResource NativeButtonNormalBorder}" Storyboard.TargetName="BrBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.07" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="MouseOver">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource NativeButtonOverBackground1}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Duration="0:0:0.07"/>
+                    <ColorAnimation To="{StaticResource NativeButtonOverBackground2}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Duration="0:0:0.07"/>
+                    <ColorAnimation To="{StaticResource NativeButtonOverBorder}" Storyboard.TargetName="BrBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.07" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource NativeButtonPressedBackground1}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Duration="0:0:0.05"/>
+                    <ColorAnimation To="{StaticResource NativeButtonPressedBackground2}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Duration="0:0:0.05"/>
+                    <ColorAnimation To="{StaticResource NativeButtonPressedBorder}" Storyboard.TargetName="BrBrush" Storyboard.TargetProperty="Color" Duration="0:0:0.05" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ColorAnimation To="{StaticResource NativeButtonDisabledBackground1}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[0].(GradientStop.Color)" Duration="0:0:0"/>
+                    <ColorAnimation To="{StaticResource NativeButtonDisabledBackground2}" Storyboard.TargetName="BgBrush" Storyboard.TargetProperty="(GradientBrush.GradientStops)[1].(GradientStop.Color)" Duration="0:0:0"/>
+                    <ColorAnimation To="{StaticResource NativeButtonDisabledBorder}" Storyboard.TargetName="BrBrush" Storyboard.TargetProperty="Color" Duration="0:0:0" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="Chrome" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+              <Border.BorderBrush>
+                <SolidColorBrush x:Name="BrBrush" Color="{StaticResource NativeButtonNormalBorder}" />
+              </Border.BorderBrush>
+              <Border.Background>
+                <LinearGradientBrush x:Name="BgBrush" EndPoint="0,1" StartPoint="0,0">
+                  <GradientStop Color="{StaticResource NativeButtonNormalBackground1}" Offset="0"/>
+                  <GradientStop Color="{StaticResource NativeButtonNormalBackground2}" Offset="1"/>
+                </LinearGradientBrush>
+              </Border.Background>
+              <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter Property="Foreground">
+                <Setter.Value>
+                  <SolidColorBrush Color="{StaticResource NativeButtonDisabledForeground}"/>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="Button" x:Key="DiffIconButtonStyle">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border Background="Transparent">
+            <ContentPresenter/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="TreeView" x:Key="TreeViewStyle">
+    <Style.Resources>
+      <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource TreeListViewSelectedRow}" />
+      <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource TreeListViewSelectedUnfocused}" />
+    </Style.Resources>
+  </Style>
+  <Style TargetType="TreeViewItem" x:Key="TreeViewItemStyle">
+    <Setter Property="BorderThickness" Value="1"/>
+    <Style.Triggers>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="IsSelected" Value="True"/>
+          <Condition Property="IsSelectionActive" Value="True"/>
+        </MultiTrigger.Conditions>
+        <Setter Property="BorderBrush" Value="{StaticResource TreeListViewFocusedNodeBorder}"/>
+      </MultiTrigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="IsSelected" Value="True"/>
+          <Condition Property="IsSelectionActive" Value="False"/>
+        </MultiTrigger.Conditions>
+        <Setter Property="BorderBrush" Value="{StaticResource TreeListViewUnfocusedNodeBorder}"/>
+      </MultiTrigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>
