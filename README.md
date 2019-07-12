@@ -7,6 +7,8 @@ This uses most of the same colors as VSCode Dark.
 
 Only supports C# for now. If you want Java etc., then change the `languages.conf` file.
 
+![dark.png](https://github.com/oddbear/semanticmerge-vs-dark/blob/master/dark.png?raw=true)
+
 ## Warning 1
 
 Will overrite default configuration files, take a backup before installing.
