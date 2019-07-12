@@ -1,6 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:converters="clr-namespace:Codice.I3;assembly=Codice.I3">
+                    xmlns:converters="clr-namespace:Codice.I3;assembly=Codice.I3"
+					xmlns:merge="clr-namespace:Codice.CM.SemanticMerge.Gui.Merge;assembly=semanticmergetool">
   <Style TargetType="ButtonBase" x:Key="I3ButtonStyle">
     <Setter Property="SnapsToDevicePixels" Value="true" />
     <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -318,5 +319,9 @@
         <Setter Property="BorderBrush" Value="{StaticResource TreeListViewUnfocusedNodeBorder}"/>
       </MultiTrigger>
     </Style.Triggers>
+  </Style>
+  <Style TargetType="{x:Type merge:DiffIconsBar}">
+    <Setter Property="Opacity" Value="1"></Setter>
+    <Setter Property="Background" Value="#FF1E1E1E"></Setter>
   </Style>
 </ResourceDictionary>
