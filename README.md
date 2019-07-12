@@ -25,5 +25,6 @@ This is done through `languages.conf` file. In semanticmerge for `semanticmerget
 ## Issues
 
 - Syntax for C# must go through another language definition file (the parser seems to work the same way, but this might change in future versions).
-- Right margin in the codeview is white, this is a transparent color to a white background, have not found a way of changing this yet.
+- ~~Right margin in the codeview is white, this is a transparent color to a white background, have not found a way of changing this yet.~~
 - Left side helper window still white, can change text color etc. but have not found any way of changing the background.
+- ~~White lines in mergetool and resultview in semnaticmergetool.~~
