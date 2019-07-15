@@ -301,6 +301,7 @@
       <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource TreeListViewSelectedRow}" />
       <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource TreeListViewSelectedUnfocused}" />
     </Style.Resources>
+    <Setter Property="BorderBrush" Value="{StaticResource TreeListViewUnfocusedNodeBorder}"/>
   </Style>
   <Style TargetType="TreeViewItem" x:Key="TreeViewItemStyle">
     <Setter Property="BorderThickness" Value="1"/>
@@ -327,5 +328,12 @@
   <Style TargetType="{x:Type merge:DiffIconsBar}">
     <Setter Property="Opacity" Value="1"></Setter>
     <Setter Property="Background" Value="#FF1E1E1E"></Setter>
+  </Style>
+  <Style TargetType="ScrollViewer" >
+    <Style.Resources>
+      <Style TargetType="StackPanel">
+        <Setter Property="Background" Value="#FF1E1E1E"></Setter>
+      </Style>
+    </Style.Resources>
   </Style>
 </ResourceDictionary>
