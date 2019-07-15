@@ -58,8 +58,8 @@
     <Color x:Key="TextBoxBorder">#808080</Color>
     <Color x:Key="TextBoxDisabledBackground">#EAEAEA</Color>
     <!-- TreeListView colors -->
-    <Color x:Key="TreeListViewSelectedRow">#F9D5CD</Color>
+    <Color x:Key="TreeListViewSelectedRow">#3C3C3C</Color>
     <Color x:Key="TreeListViewSelectedUnfocused">#E3E3E3</Color>
 	<!-- # semantic outline text color: -->
-    <Color x:Key="TreeListViewNodeForeground">#000000</Color>
+    <Color x:Key="TreeListViewNodeForeground">#B2B2B2</Color>
 </ResourceDictionary>
