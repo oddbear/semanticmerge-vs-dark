@@ -336,4 +336,25 @@
       </Style>
     </Style.Resources>
   </Style>
+  
+	<!-- HACK:
+		This property seems to be set to a local variable, that means it cannot be changed with styles.
+		However, animations have a higher priority.
+		This will throw exception on some values, ex. the buttons "visual diff", "run text diff".
+	-->
+	<Style TargetType="{x:Type TextBlock}">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground.Color}" Value="#FF003399">
+				<DataTrigger.EnterActions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground.Color">
+								<EasingColorKeyFrame KeyTime="0" Value="#FFFF455D" />
+							</ColorAnimationUsingKeyFrames>
+						</Storyboard>
+					</BeginStoryboard>
+				</DataTrigger.EnterActions>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
 </ResourceDictionary>
